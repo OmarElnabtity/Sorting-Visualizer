@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+using namespace std;
 
 #include "Sorter.h"
 
@@ -7,15 +8,15 @@ class ArrayManager {
 public:
     ArrayManager(int size);
 
-    void generateRandom();
-    void reset();
-    void applyStep(const SortStep& step);
-    void undoStep(const SortStep& step);
+    void generateRandom();                  //generates a random array
+    void reset();                           //resets the array
+    void applyStep(const SortStep& step);   //progress a single step
+    void undoStep(const SortStep& step);    //undo a single step
 
-    const std::vector<int>& get();
-    void set(const std::vector<int>& arr);
+    const vector<int>& get();               //get the generated array
+    void set(const std::vector<int>& arr);  //set the array
 
 private:
-    std::vector<int> arr;
-    std::vector<int> original;
+    vector<int> arr;
+    vector<int> original;
 };

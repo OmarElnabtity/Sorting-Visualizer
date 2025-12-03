@@ -8,27 +8,27 @@ ArrayManager::ArrayManager(int size) {
 
 void ArrayManager::generateRandom() {
     for (int& v : arr)
-        v = rand() % 500 + 10;
+        v = rand() % 500 + 10;          //generate random values 10 -> 509
 
-    original = arr;
+    original = arr;                     //save generated array in the original
 }
 
 void ArrayManager::applyStep(const SortStep &step) {
-    arr = step.arr;
+    arr = step.arr;                     //set the array to be the array of the next step
 }
 
 void ArrayManager::undoStep(const SortStep &step) {
-    arr = step.arr;
+    arr = step.arr;                     //set the array to be the array of the previous step
 }
 
 void ArrayManager::reset() {
-    arr = original;
+    arr = original;                     //set the array to be the original one
 }
 
-const std::vector<int>& ArrayManager::get() {
-    return arr;
+const vector<int>& ArrayManager::get() {
+    return arr;                         //returns array
 }
 
-void ArrayManager::set(const std::vector<int>& newArr) {
-    arr = newArr;
+void ArrayManager::set(const vector<int>& newArr) {
+    arr = newArr;                       //set the array to the new array
 }

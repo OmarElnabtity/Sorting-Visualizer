@@ -1,48 +1,56 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+
+#include "AlgorithmSelectUI.h"
 #include "ArrayManager.h"
 #include "Sorter.h"
 #include "Visualizer.h"
 #include "UIManager.h"
 #include "Controller.h"
+using namespace std;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(900, 600), "Sorting Visualizer", sf::Style::Close);
-    window.setFramerateLimit(60);
+    AlgorithmSelectUI menu(400, 600);                        //initialize menu to select algorithm
+    SortAlgorithm chosen = menu.run();                                  //get the chosen algorithm
 
-    ArrayManager array(80);
-    Sorter sorter;
-    Visualizer visualizer(900, 500);
-    UIManager ui;
-    Controller controller(array, sorter, visualizer, ui);
+    sf::RenderWindow window(sf::VideoMode(1000, 620), "Sorting Visualizer", sf::Style::Close);
+    window.setFramerateLimit(60);                                       //initialize the window configuration
 
-    sf::Clock deltaClock;
+    ArrayManager array(200);                                        //set array size
+    Sorter sorter;                                                      //initialize sorter
+    Visualizer visualizer(1000, 500);                        //initialize visualizer
+    UIManager ui;                                                       //initialize user interface
+    Controller controller(array, sorter, visualizer, ui);   //initialize controller
+
+    controller.setAlgorithm(chosen);                                    //set algorithm to the chosen one
+    sf::Clock deltaClock;                                               //configure clock to measure time between frames
 
     while (window.isOpen()) {
-        sf::Event event;
+        sf::Event event;                                                //initialize an event
 
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event)) {                            //handle events
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
             if (event.type == sf::Event::MouseButtonPressed) {
-                ui.handleClick(sf::Mouse::getPosition(window), controller, array, sorter);
+                ui.handleClick(sf::Mouse::getPosition(window), controller, array); //handle mouse click
             }
         }
 
-        float dt = deltaClock.restart().asSeconds();
-        controller.update(dt);
+        float dt = deltaClock.restart().asSeconds();                    //measure time since last frame
+        controller.update(dt);                                          //update the screen one step
 
-        ui.updateStatus(
+        ui.updateStatus(                                                //update screen status
         "Status: " + controller.getStateString() +
-        "   Step " + std::to_string(controller.getStepIndex()) +
-        "/" + std::to_string(controller.getTotalSteps())
+        "   Step " + to_string(controller.getStepIndex()) +
+        "/" + to_string(controller.getTotalSteps())
         );
 
-        window.clear(sf::Color(30, 30, 30));
-        controller.draw(window);
-        ui.draw(window);
-        window.display();
+        window.clear(sf::Color(30, 30, 30));             //clear the screen
+        controller.draw(window);                                     //draw current window
+        ui.draw(window);                                             //draw the user interface
+        window.display();                                               //display window
     }
 
     return 0;

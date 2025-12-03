@@ -1,26 +1,27 @@
 #include "UIManager.h"
 #include "Controller.h"
 
-UIManager::UIManager()
+UIManager::UIManager()  //define buttons and their positions
         : playBtn("Play", {20, 520}),
           pauseBtn("Pause", {140, 520}),
           resetBtn("Reset", {260, 520}),
-          prevBtn("Prev", {380, 520}),
-          nextBtn("Next", {500, 520}),
-          speedSlow("Slow", {650, 520}),
-          speedMedium("Medium", {750, 520}),
-          speedFast("Fast", {870, 520})
+          prevBtn("Prev", {410, 520}),
+          nextBtn("Next", {530, 520}),
+          speedSlow("Slow", {680, 520}),
+          speedMedium("Medium", {780, 520}),
+          speedFast("Fast", {880, 520})
 {
+    //configures status options
     font.loadFromFile("resources/OpenSans-Regular.ttf");
 
     statusText.setFont(font);
     statusText.setCharacterSize(18);
     statusText.setFillColor(sf::Color::White);
-    statusText.setPosition(20, 10);
+    statusText.setPosition(20, 580);
     statusText.setString("Status: Idle");
 }
 
-void UIManager::draw(sf::RenderWindow &window) {
+void UIManager::draw(sf::RenderWindow &window) {    //draw everything on the window
     playBtn.draw(window);
     pauseBtn.draw(window);
     resetBtn.draw(window);
@@ -33,15 +34,15 @@ void UIManager::draw(sf::RenderWindow &window) {
     window.draw(statusText);
 }
 
-void UIManager::updateStatus(const std::string& s)
+void UIManager::updateStatus(const string& s)       //update status
 {
     statusText.setString(s);
 }
 
-void UIManager::handleClick(sf::Vector2i mouse, Controller& controller, ArrayManager& arr, Sorter& sorter)
+void UIManager::handleClick(sf::Vector2i mouse, Controller& controller, ArrayManager& arr)
 {
     if (playBtn.isClicked(mouse))
-        controller.play(sorter.bubbleSort(arr.get()));
+        controller.play();
 
     else if (pauseBtn.isClicked(mouse))
         controller.pause();

@@ -25,6 +25,9 @@ add_executable(SortingVisualizer main.cpp
         src/UIManager.cpp
         include/Controller.h
         src/Controller.cpp
+        include/SortAlgorithm.h
+        include/AlgorithmSelectUI.h
+        src/AlgorithmSelectUI.cpp
 )
 
 target_link_libraries(SortingVisualizer
