@@ -1,9 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+using namespace std;
 
 class Button {
 public:
-    Button(const std::string& text, sf::Vector2f pos);
+    Button(const string& text, sf::Vector2f pos);
 
     void draw(sf::RenderWindow& window);
     bool isClicked(const sf::Vector2i& mousePos);

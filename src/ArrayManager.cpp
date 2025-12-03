@@ -25,10 +25,10 @@ void ArrayManager::reset() {
     arr = original;
 }
 
-const std::vector<int>& ArrayManager::get() {
+const vector<int>& ArrayManager::get() {
     return arr;
 }
 
-void ArrayManager::set(const std::vector<int>& newArr) {
+void ArrayManager::set(const vector<int>& newArr) {
     arr = newArr;
 }

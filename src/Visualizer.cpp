@@ -4,7 +4,7 @@ Visualizer::Visualizer(int width, int height)
     : windowWidth(width), windowHeight(height) {}
 
 void Visualizer::drawArray(sf::RenderWindow& window,
-                            const std::vector<int> &arr,
+                            const vector<int> &arr,
                             int a, int b,
                             bool isSwap)
 {

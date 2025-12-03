@@ -4,6 +4,7 @@
 #include "ArrayManager.h"
 #include "Button.h"
 #include "Sorter.h"
+using namespace std;
 
 class Controller;
 
@@ -12,9 +13,9 @@ public:
     UIManager();
 
     void draw(sf::RenderWindow& window);
-    void handleClick(sf::Vector2i mouse, Controller& controller, ArrayManager& arr, Sorter& sorter);
+    void handleClick(sf::Vector2i mouse, Controller& controller, ArrayManager& arr);
 
-    void updateStatus(const std::string& s);
+    void updateStatus(const string& s);
 
 private:
     Button playBtn;

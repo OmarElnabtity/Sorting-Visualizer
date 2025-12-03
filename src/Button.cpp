@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(const std::string& text, sf::Vector2f pos) {
+Button::Button(const string& text, sf::Vector2f pos) {
     font.loadFromFile("resources/OpenSans-Regular.ttf");
 
     box.setSize({100, 40});

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+using namespace std;
 
 #include "Sorter.h"
 
@@ -12,10 +13,10 @@ public:
     void applyStep(const SortStep& step);
     void undoStep(const SortStep& step);
 
-    const std::vector<int>& get();
+    const vector<int>& get();
     void set(const std::vector<int>& arr);
 
 private:
-    std::vector<int> arr;
-    std::vector<int> original;
+    vector<int> arr;
+    vector<int> original;
 };

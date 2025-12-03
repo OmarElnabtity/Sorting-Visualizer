@@ -5,9 +5,29 @@ Controller::Controller(ArrayManager& arr, Sorter& s, Visualizer& v, UIManager& u
     : state(Idle), stepIndex(0), timer(0), array(arr),
       sorter(s), visualizer(v), ui(u) {}
 
-void Controller::play(const std::vector<SortStep>& s) {
-    if (state == Idle)
-        steps = s;
+void Controller::play() {
+
+    if (state == Idle) {
+        switch (algorithm) {
+            case SortAlgorithm::Bubble:
+                steps = sorter.bubbleSort(array.get());
+                break;
+
+            case SortAlgorithm::Insertion:
+                steps = sorter.insertionSort(array.get());
+                break;
+
+            case SortAlgorithm::Merge:
+                steps = sorter.mergeSort(array.get());
+                break;
+
+            case SortAlgorithm::Quick:
+                steps = sorter.quickSort(array.get());
+                break;
+        }
+
+        stepIndex = 0;
+    }
 
     state = Playing;
 }
@@ -66,7 +86,7 @@ void Controller::draw(sf::RenderWindow& window) {
     visualizer.drawArray(window, array.get(), a, b, swap);
 }
 
-std::string Controller::getStateString() const
+string Controller::getStateString() const
 {
     switch (state) {
         case Idle: return "Idle";

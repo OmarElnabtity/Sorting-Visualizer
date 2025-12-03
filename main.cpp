@@ -1,19 +1,27 @@
 #include <SFML/Graphics.hpp>
+
+#include "AlgorithmSelectUI.h"
 #include "ArrayManager.h"
 #include "Sorter.h"
 #include "Visualizer.h"
 #include "UIManager.h"
 #include "Controller.h"
+using namespace std;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(900, 600), "Sorting Visualizer", sf::Style::Close);
+    AlgorithmSelectUI menu(400, 600);
+    SortAlgorithm chosen = menu.run();
+
+    sf::RenderWindow window(sf::VideoMode(1000, 620), "Sorting Visualizer", sf::Style::Close);
     window.setFramerateLimit(60);
 
-    ArrayManager array(80);
+    ArrayManager array(120);
     Sorter sorter;
-    Visualizer visualizer(900, 500);
+    Visualizer visualizer(1000, 500);
     UIManager ui;
     Controller controller(array, sorter, visualizer, ui);
+
+    controller.setAlgorithm(chosen);
 
     sf::Clock deltaClock;
 
@@ -26,7 +34,7 @@ int main() {
             }
 
             if (event.type == sf::Event::MouseButtonPressed) {
-                ui.handleClick(sf::Mouse::getPosition(window), controller, array, sorter);
+                ui.handleClick(sf::Mouse::getPosition(window), controller, array);
             }
         }
 
@@ -35,8 +43,8 @@ int main() {
 
         ui.updateStatus(
         "Status: " + controller.getStateString() +
-        "   Step " + std::to_string(controller.getStepIndex()) +
-        "/" + std::to_string(controller.getTotalSteps())
+        "   Step " + to_string(controller.getStepIndex()) +
+        "/" + to_string(controller.getTotalSteps())
         );
 
         window.clear(sf::Color(30, 30, 30));
